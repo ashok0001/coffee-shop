@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
 
 const Links = ['Home', 'About', 'Contact', 'Login'];
 
@@ -29,9 +30,11 @@ const NavLink = ({ children, ...props }) => (
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeLink, setActiveLink] = useState('');
+  const navigate=useNavigate()
 
   const handleClick = (link) => {
     setActiveLink(link);
+    navigate(`/${link.toLowerCase()}`)
     onClose();
   };
 
@@ -80,6 +83,7 @@ const Navbar = () => {
                 onClick={() => handleClick(link)}
                 color={link === activeLink ? 'teal.500' : 'gray.600'}
                 className="cursor-pointer"
+
               >
                 {link}
               </NavLink>
